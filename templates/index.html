@@ -16,16 +16,16 @@
     <!-- amCharts javascript sources -->
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/ammap.js"></script>
     <script type="text/javascript" src="https://www.amcharts.com/lib/3/maps/js/continentsLow.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- amCharts javascript code -->
     <script type="text/javascript">
-        AmCharts.makeChart("map",{
+        var a = AmCharts.makeChart("map",{
                 "type": "map",
                 "pathToImages": "http://www.amcharts.com/lib/3/images/",
                 "addClassNames": true,
                 "fontSize": 15,
                 "color": "#FFFFFF",
-                "dragMap": true,
+                "dragMap": false,
                 "projection": "mercator",
                 "backgroundAlpha": 1,
                 "backgroundColor": "rgba(58,56,56,1)",
@@ -127,8 +127,28 @@
 <body>
 <div><p style="text-align:center;"><img src="{{ url_for('static', filename='img/logo2.png')}}"> </img></p>
 </div>
+<button type="button" onclick="clicked()" id="generate" name="button">Click Me To Generate your playlist!</button>
 <div id="map" style="width: 100%; height: 650px;"></div>
 <div></div>
 
+<script type="text/javascript">
+  function clicked() {
+    if("id" in a.selectedObject) {
+      $.ajax({
+         type: "POST",
+         url: "http://127.0.0.1:5000/generate_playlist",
+         data: {"city": a.selectedObject["id"]},
+         success : function(data) {
+               console.log(data)
+           }
+       }).done(function(data){
+           console.log(data)
+       })
+    }
+    else {
+      alert("Have a nice js alert ;) - Please select a continent")
+    }
+  }
+</script>
 </body>
 </html>
