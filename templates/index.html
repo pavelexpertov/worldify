@@ -38,7 +38,7 @@
                             "width": 80,
                             "height": 40,
                             "pixelMapperLogo": true,
-                            "imageURL": "http://pixelmap.amcharts.com/static/img/logo.svg",
+                            <!--"imageURL": "http://pixelmap.amcharts.com/static/img/logo.svg"-->,
                             "url": "http://www.amcharts.com"
                         }
                     ],
@@ -103,7 +103,7 @@
                     "selectedBrightness": 20
                 },
                 "zoomControl": {
-                    "zoomControlEnabled": true,
+                    "zoomControlEnabled": false,
                     "homeButtonEnabled": false,
                     "panControlEnabled": false,
                     "right": 38,
@@ -122,7 +122,7 @@
 <title>Page Title</title>
 </head>
 <body>
-<div><img src="{{ url_for('static', filename='img/logo2.png')}}">  </img>
+<div><p style="text-align:center;"><img src="{{ url_for('static', filename='img/logo2.png')}}" align="middle"> </img></p>
 </div>
 <div id="map" style="width: 100%; height: 751px;"></div>
 <div></div>
