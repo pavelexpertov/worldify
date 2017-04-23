@@ -5,6 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
+labels.txt
+reviews.txt
 
 # Distribution / packaging
 .Python
