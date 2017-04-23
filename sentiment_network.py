@@ -2,6 +2,8 @@ import numpy as np
 from collections import Counter
 import time
 import sys
+import os
+import pickle
 
 
 class SentimentNetwork:
@@ -55,15 +57,24 @@ class SentimentNetwork:
 
         print('Get total log ratio of words')
 
-        review_vocab = set()
-        for review in reviews:
-            for word in review.split(" "):
-                if(total_counts[word] > min_count):
-                    if(word in pos_neg_ratios.keys()):
-                        if(pos_neg_ratios[word] >= polarity or pos_neg_ratios[word] <= -polarity):
+        if not (os.path.isfile('./review_vocab.pkl')):
+            review_vocab = set()
+            for review in reviews:
+                for word in review.split(" "):
+                    if(total_counts[word] > min_count):
+                        if(word in pos_neg_ratios.keys()):
+                            if(pos_neg_ratios[word] >= polarity or pos_neg_ratios[word] <= -polarity):
+                                review_vocab.add(word)
+                        else:
                             review_vocab.add(word)
-                    else:
-                        review_vocab.add(word)
+
+            pkl_file = open('./review_vocab.pkl', 'wb')
+            pickle.dump(review_vocab, pkl_file)
+        else:
+            pkl_file = open('./review_vocab.pkl', 'rb')
+            review_vocab = pickle.load(pkl_file)
+
+        pkl_file.close()
         self.review_vocab = list(review_vocab)
 
         print('Get only the words with high polarity')
