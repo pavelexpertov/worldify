@@ -1,0 +1,6 @@
+simplejson
+twitter
+requirements
+spotipy
+numpy
+flask
